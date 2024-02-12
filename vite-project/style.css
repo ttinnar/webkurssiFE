@@ -19,11 +19,13 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #5259e0;
+  color: #535bf2;
 }
 
 body {
   margin: 0;
+  display: flex;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -38,7 +40,6 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  color: #646cff;
 }
 
 .logo {

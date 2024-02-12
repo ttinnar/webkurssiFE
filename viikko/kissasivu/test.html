@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Positioning Items</title>
+    <meta charset="UTF-8" />
+    <style>
+      /*////////////////////
+        // Positioning items    
+        //////////////////////
+        
+        Reset *
+        Display: inline vs block
+        https://www.w3schools.com/cssref/pr_class_display.asp
+    
+        Box-sizing
+        https://www.w3schools.com/css/css3_box-sizing.asp
+        
+        Using percentages and max-width
+        https://www.w3schools.com/cssref/css_units.asp
+
+        Centering
+        https://www.w3schools.com/css/css_align.asp
+    
+        Float and clear
+        https://www.w3schools.com/cssref/pr_class_float.asp
+
+                
+        Absolute/Relative positioning
+        https://www.w3schools.com/cssref/pr_class_position.asp
+        
+        
+        Flexbox - https://www.w3schools.com/css/css3_flexbox.asp
+
+        */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-image: url(https://cdn.pixabay.com/photo/2023/08/12/17/30/animal-8186168_1280.jpg);
+        background-position: top;
+      }
+
+      .box {
+        height: 50px;
+        width: 100px;
+        border: 5px solid rgba(255, 255, 255, 0.36);
+        padding: 10px;
+        color: aliceblue;
+        display: inline-block;
+        text-align: center;
+      }
+
+      #red {
+        background-color: rgba(171, 1, 1, 0.923);
+      }
+      #green {
+        background-color: green;
+      }
+      #blue {
+        background-color: rgba(13, 13, 187, 0.93);
+      }
+      #yellow {
+        background-color: yellow;
+        color: black;
+      }
+      #orange {
+        background-color: orange;
+      }
+
+      .clear {
+        clear: both;
+      }
+
+      /* img */
+      img {
+      }
+
+      /* container */
+      .container {
+      }
+
+      /* relative and absolute positioning with blue */
+      #blue {
+      }
+
+      .info {
+        color: rgb(86, 61, 200);
+      }
+
+      p {
+        color: darkblue;
+      }
+
+      main {
+        background-color: rgba(217, 213, 202, 0.6);
+        padding: 10px;
+        border: 3px dashed royalblue;
+        margin: 30px;
+        width: 70%;
+        margin-top: 100px;
+        text-align: center;
+        margin: 100px auto 50px; 
+      }
+
+      footer {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 10px;
+        background-color: rgba(210, 210, 204, 0.538);
+        width: 100%;
+        height: 30%;
+      }
+
+      #kiisu {
+        height: 300px;
+        width: auto;
+        float: right;
+      }
+
+      .topnav{
+  overflow: hidden;
+  position: fixed;
+  top: 1px;
+  right: 1px;
+  left: 1px;
+  width: 100%;
+  z-index: 1;
+}
+
+.topnav div{
+  font-family: Verdana;
+  font-size: 16px;
+  color: white;
+}
+.topnav div {
+  list-style-type: none;
+  margin: 0;
+  padding: 1px;
+  overflow: hidden;
+  background-color: black;
+}
+.topnav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 30px;
+  text-decoration: none;
+  float: right;
+}
+    </style>
+  </head>
+
+
+  <body>
+
+    <div class="topnav">
+      <div>
+          <a href="">Contact</a>
+          <a href="">Products</a>
+          <a href="">Home</a>
+      </div>
+    </div>
+
+      <div class="box" id="red">Contact</div>
+      <div class="box" id="green">Box 2</div>
+      <div class="box" id="blue">Box 3</div>
+      <div class="box" id="yellow">Box 4</div>
+      <div class="box" id="orange">Box 5</div>
+    
+    <!-- Float continues, clearing -->
+
+    <main>
+
+        <img id="kiisu" src="kiisu.webp" alt="kiisu" />
+        <h1>KIISU</h1>
+        <h1><333</h1>
+
+        <!-- Responsive images and centering -->
+
+        <p style="font-size: xx-large;"> Kissat on maailman hienoin konsepti. </p>
+    
+        <p style="color: blueviolet; font-size: large;"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, pariatur quia. Doloremque inventore 
+            dolores harum voluptas aliquam, sint magnam sapiente, odit eius iure tempora 
+            itaque tempore officiis ratione, nulla alias?</p>
+
+        <p class="info"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, soluta laboriosam modi culpa labore unde! 
+            Eius quam adipisci magni. 
+            Officia iusto, fugit dignissimos veniam neque soluta quis suscipit minima eaque?</p>
+
+    </main>
+    <footer>COPIRIGHTI LOL SOOSOO</footer>
+  </body>
+</html>

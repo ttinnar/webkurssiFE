@@ -6,6 +6,9 @@ body {
   color: white;
 }
 
+h2 {
+  text-align: center;
+}
 
 h3 {
   color: rgb(0, 13, 153);
@@ -55,4 +58,17 @@ h3 {
 figure {
   align-items: center;
   text-align: center;
+}
+
+#cards {
+  min-height: 60px;
+  background-color: rgb(2, 2, 42);
+}
+
+p {
+  text-align: center;
+}
+
+img {
+  max-width: 280px;
 }

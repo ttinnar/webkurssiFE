@@ -9,7 +9,8 @@ export function showPics(element) {
             if (!response.ok) throw new Error('INVALIIDI lol');
             const images = await response.json();
 
-            const random = Math.floor(Math.random() * images.lenght); 
+            const random = Math.floor(Math.random() * images.length);
+ 
             console.log(images)
             const alt = images[random].name;     // the 'name' property of the second object in the 'images' array
             const figurecap = images[random].description; // 'description' property of the second object object in the 'images' array
@@ -23,6 +24,8 @@ export function showPics(element) {
             // haetaan kuvateksti
             const kuvateksti = document.querySelector('figcaption');
             kuvateksti.innerText = figurecap;
+                
+
         } catch (error) {
             console.log(error);
         }

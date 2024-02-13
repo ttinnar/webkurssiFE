@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import { setupCounter } from './counter.js';
 import {showJoke} from './joke.js';
 import { showPics } from './catpics.js';
+import { showCats } from './catpics2.js';
 
 // MITÄ LIENEE TESTAILUI
 // document.querySelector('#app').innerHTML = 'Moi täällä ollaan';
@@ -19,3 +20,4 @@ showJoke(element);
 showJoke(document.querySelector('.chuck'));
 
 showPics(document.querySelector('.kisukuva'));
+showCats(document.querySelector('.kisukuva'));

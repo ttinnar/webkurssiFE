@@ -1,4 +1,7 @@
-function showjoke(element) {
-    console.log('moiiiiii');
-    console.log(element);
+export function showjoke(element) {
+    function getjoke() {
+        console.log('moiiiiii');
+    }
+
+    element.addEventListener('click', () => getjoke());
 }

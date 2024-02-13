@@ -2,13 +2,20 @@ import './style.css';
 import javascriptLogo from './javascript.svg';
 import viteLogo from '/vite.svg';
 import { setupCounter } from './counter.js';
-import { showjoke } from './joke.js';
+import {showJoke} from './joke.js';
+import { showPics } from './catpics.js';
 
-document.querySelector('#app').innerHTML = 'moi ollaa tääl'
+// MITÄ LIENEE TESTAILUI
+// document.querySelector('#app').innerHTML = 'Moi täällä ollaan';
+// setupCounter(document.querySelector('button'));
+// setupCounter(document.querySelector('button2'));
 
 
+// haetaan nappula ja tarjotaa se showJokelle
 let element = document.querySelector('.chuck');
 console.log(element);
-showjoke(element);
+showJoke(element);
 
-// setupCounter(document.querySelector('button'));
+showJoke(document.querySelector('.chuck'));
+
+showPics(document.querySelector('.kisukuva'));

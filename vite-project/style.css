@@ -62,7 +62,6 @@ figure {
 
 #cards {
   min-height: 60px;
-  background-color: rgb(2, 2, 42);
 }
 
 p {
@@ -70,5 +69,5 @@ p {
 }
 
 img {
-  max-width: 280px;
+  max-width: 150px;
 }

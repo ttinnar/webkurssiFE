@@ -39,39 +39,46 @@
       }
 
       #left {
-        background-color: rgb(0, 55, 0);
+        background-color: rgb(255, 255, 255);
         flex: 1;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
       }
 
       #right {
-        background-color: rgb(0, 0, 80);
+        background-color: rgb(255, 255, 255);
         flex: 1;
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
       .card {
         width: 300px;
         height: 400px;
-        background-color: rgba(32, 0, 128, 0.784);
+        background-color: rgb(31, 0, 123);
+        border-radius: 20px;
       }
       img {
         margin-top: 10px;
       }
       .upper {
         background-color: black;
-        flex: 25%;
+        flex: 15%;
         justify-content: center;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
+        border-radius: 20px;
       }
       .lower {
-        background-color: white;
         color: black;
         flex: 75%;
       }
+      p {
+        color: white;
+      }
+
+
       @media screen and (max-width: 650px) {
         .container {
             flex-direction: column;
@@ -90,17 +97,29 @@
   <body>
     <div class="container">
         <div class="box" id="left">
-            <div class="card">
+            <div class="upper">
+              <h2>KIISUT >:3</h2>
+            </div>
+            <div class="lower">
+              <div class="card">
+                <img src="http://placekitten.com/g/200/300" alt="kisu">
+                <p>:D</p>
+                <p>kiisut is life</p>
+              </div>
+          </div>
+        </div>    
+        <div class="box" id="right">
+            <div class="upper">
+              <h2>KIISUT >:3</h2>
+            </div>
+            <div class="lower">
+              <div class="card">
                 <img src="http://placekitten.com/g/200/300" alt="kisu">
                 <p>:D</p>
                 <p>kiisut is life</p>
             </div>
-        </div>    
-        <div class="box" id="right">
-            <div class="upper">
-                <h2>KIISUT >:3</h2>
             </div>
-            <div class="lower">alempi</div>
+
         </div>
     </div>
 

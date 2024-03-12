@@ -6,8 +6,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'start-api-harjoituspohja.html'),
-        home: resolve(__dirname, 'start-auth.html'),
+        main: resolve(__dirname, 'index.html'),
+        home: resolve(__dirname, 'home.html'),
       },
     },
   },

@@ -8,7 +8,7 @@ createUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt luodaan käyttäjä');
 
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
+  const url = '/api/users';
 
   const form = document.querySelector('.create_user_form');
   const username = form.querySelector('input[name=username]').value;
@@ -54,7 +54,7 @@ loginUser.addEventListener('click', async (evt) => {
   //   "password": "secret"
   // }
 
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
+  const url = '/api/auth/login';
 
   const form = document.querySelector('.login_form');
 
@@ -105,7 +105,7 @@ meRequest.addEventListener('click', async () => {
   // GET http://localhost:3000/api/auth/me
   // Authorization: Bearer (put-user-token-here)
 
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
+  const url = '/api/auth/me';
   const muntokeni = localStorage.getItem('token');
   console.log('Tämä on haettu LocalStoragesta', muntokeni);
 

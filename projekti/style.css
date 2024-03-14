@@ -1,8 +1,9 @@
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  text-shadow: 2px 2px #0000006f;
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -14,12 +15,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 html {
-  background-image: url('https://i.pinimg.com/564x/e7/67/d4/e767d4358d7b40df33ae561cdfc4f7dc.jpg');
+  background-image: url('https://w.forfun.com/fetch/de/de15acfd670988be6fb60f440728d7ba.jpeg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  color: white;
 }
 
 * {
@@ -89,7 +92,7 @@ button:focus-visible {
 } */
 
 h3 {
-  border-bottom: 1px solid rgb(184, 15, 117);
+  border-bottom: 5px solid rgba(255, 255, 255, 0.229);
   margin-top: 50px;
 }
 
@@ -109,8 +112,8 @@ button.del {
 ::backdrop {
   background-image: linear-gradient(
     45deg,
-    magenta,
-    rebeccapurple,
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
     dodgerblue,
     green
   );
@@ -123,7 +126,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #360fab;
+  background-color: #000000b9;
 }
 
 li {
@@ -143,7 +146,7 @@ li a:hover {
 }
 
 li a:hover:not(.active) {
-  background-color: #c83d3d;
+  background-color: #020067;
 }
 
 .active {
@@ -156,6 +159,7 @@ li a:hover:not(.active) {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  background-color: #ffffff52;
 }
 #name {
   font-weight: bolder;
@@ -174,7 +178,7 @@ li a:hover:not(.active) {
 }
 
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: #0000007e;
   color: #ffffff;
   text-align: left;
 }
@@ -193,11 +197,11 @@ li a:hover:not(.active) {
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: #ffffff96;
 }
 .styled-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: #000000;
 }
 
 .styled-table tbody tr:hover {
@@ -205,23 +209,29 @@ li a:hover:not(.active) {
   cursor: pointer;
 }
 .forms {
-  display: flex; 
+  display: flex;
   gap: 30px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Korjattu: käytä min-heightia */
 }
 
 /* Formin tyylittely */
 form {
-  background-color: #009879;
+  background-color: #0000006c;
   color: #ffffff;
-  padding: 10px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  padding: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
   font-weight: bold;
   width: 300px;
   font-size: 0.9em;
-  font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
+
 /* Input kenttien tyylittely */
 input[type=text], input[type=password], input[type=email] {
   width: 100%;
@@ -258,4 +268,8 @@ th, td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+#hidden {
+  display: none;
 }

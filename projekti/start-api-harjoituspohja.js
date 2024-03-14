@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   btEntry.addEventListener('click', async () => {
     console.log('Klikki toimii');
-    const url = 'http://localhost:3000/api/entries/1';
+    const url = '/api/entries/1';
 
     fetchData(url).then((data) => {
       // käsitellään fetchData funktiosta tullut JSON
@@ -50,7 +50,7 @@ const btUsers = document.querySelector('.get_users');
 btUsers.addEventListener('click', getUsers);
 
 async function getUsers() {
-  const url = 'http://localhost:3000/api/users'
+  const url = '/api/users'
   const options = {
     method: 'GET',
     headers: {
@@ -65,28 +65,9 @@ async function getUsers() {
 };
 
 
-// ENSIMMÄINEN TAPA TAULUKKOON
-
-//function createTable(data) {
-  //console.log(data);
-
-  //const tbody = document.querySelector('.tbody');
-
-  //loopissa luodaan jokaiselle tietoriville oikeat elementit
-  //elementtien sisään pistetään oikeat tiedot
-
-  //data.forEach(rivi => {
-    //console.log(rivi.username, rivi.user_level);
-
-    //Luodaan jokaiselle riville ensin TR elementti alkuun
-    //const tr = document.createElement('tr');
-    //tbody.appendChild(tr);
-  //});
-//}
-
 // TOINEN TAPA USERS-TAULUKKOON
 async function createTable(data) {
-  const url = 'http://127.0.0.1:3000/api/users';
+  const url = '/api/users';
 
   const options = {
     method: 'GET',
@@ -160,7 +141,7 @@ function getUser() {
 function deleteUser(evt) {
   console.log('DELETE NY:/');
 
-  const url = 'http://localhost:3000/api/users/';
+  const url = '/api/users/';
   let token = localStorage.getItem('token');
   const options = {
     method: 'DELETE',
@@ -190,19 +171,11 @@ async function showUserName() {
 showUserName();
 
 
-
-
-// 1. testataan ensin YKSI endpoint joka ei vaadi tokenia
-// 2. uudelleen strukturoidaan koodi jotta se on modulaarisempi
-
-// tämä toimi ennen autentikaatiota, nyt tarvitsee tokenin, siistitään pian!
-// sivuille on nyt myös lisätty navigaatio html sivuun, sekä siihen sopiva CSS koodi, hae siis uusi HTML ja UUSI CSS ennen kun aloitat
-
 async function getAllUsers() {
   console.log('toimii!');
 
   try {
-    const response = await fetch('http://127.0.0.1:3000/api/users');
+    const response = await fetch('https://trdns.northeurope.cloudapp.azure.com/api/users');
     console.log(response);
     const data = await response.json();
     console.log(data);

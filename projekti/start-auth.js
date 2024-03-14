@@ -8,21 +8,10 @@ createUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt luodaan käyttäjä');
 
-  const url = 'http://127.0.0.1:3000/api/users';
-
-  // # Create user
-  // POST http://127.0.0.1:3000/api/users
-  // content-type: application/json
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
 
   const form = document.querySelector('.create_user_form');
   const username = form.querySelector('input[name=username]').value;
-
-  // kokeillaan ensin kovakoodattuna
-  // const body = {
-  //   username: 'testii',
-  //   password: 'testii',
-  //   email: 'testii@testii.fi',
-  // };
 
   const data = {
     username: username,
@@ -38,10 +27,6 @@ createUser.addEventListener('click', async (evt) => {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   };
 
-  // fetchData(url, options).then((data) => {
-  //   // käsitellään fetchData funktiosta tullut JSON
-  //   console.log(data);
-  // });
 
   // parempi ehkä käyttää samaa muotoilua
   try {
@@ -69,7 +54,7 @@ loginUser.addEventListener('click', async (evt) => {
   //   "password": "secret"
   // }
 
-  const url = 'http://localhost:3000/api/auth/login';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
 
   const form = document.querySelector('.login_form');
 
@@ -105,7 +90,7 @@ loginUser.addEventListener('click', async (evt) => {
     } else {
       alert('Authorized: you will now be redirected in 3 seconds');
       setTimeout(function () {
-      window.location.href = 'start-api-harjoituspohja.html';
+      window.location.href = 'home.html';
       }, 3000);
     }
   });
@@ -120,7 +105,7 @@ meRequest.addEventListener('click', async () => {
   // GET http://localhost:3000/api/auth/me
   // Authorization: Bearer (put-user-token-here)
 
-  const url = 'http://localhost:3000/api/auth/me';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
   const muntokeni = localStorage.getItem('token');
   console.log('Tämä on haettu LocalStoragesta', muntokeni);
 

@@ -90,7 +90,7 @@ loginUser.addEventListener('click', async (evt) => {
     } else {
       alert('Authorized: you will now be redirected in 3 seconds');
       setTimeout(function () {
-      window.location.href = 'home.html';
+      window.location.href = 'index.html';
       }, 3000);
     }
   });

@@ -1,141 +1,239 @@
 import './style.css';
 import { fetchData } from './fetch.js';
 
-// haetaan nappi josta lähetetään formi ja luodaan käyttäjä
-const createUser = document.querySelector('.createuser');
+let myToken = localStorage.getItem('token');
 
-createUser.addEventListener('click', async (evt) => {
-  evt.preventDefault();
-  console.log('Nyt luodaan käyttäjä');
+document.addEventListener('DOMContentLoaded', function() {
+  const btEntry = document.querySelector('.get_entry');
+  const resultBody = document.querySelector('.result-body');
 
+  btEntry.addEventListener('click', async () => {
+    console.log('Klikki toimii');
+    const url = 'https://trdns.northeurope.cloudapp.azure.com/api/entries/1';
+
+    fetchData(url).then((data) => {
+      // käsitellään fetchData funktiosta tullut JSON
+      console.log(data);
+
+      // Clear existing table rows
+      resultBody.innerHTML = '';
+
+      // Check if data is an object before displaying
+      if (typeof data === 'object') {
+        // Create table rows dynamically
+        Object.entries(data).forEach(([key, value]) => {
+          const row = document.createElement('tr');
+          const keyCell = document.createElement('td');
+          const valueCell = document.createElement('td');
+
+          // Set content for each cell
+          keyCell.textContent = key;
+          valueCell.textContent = value;
+
+          // Append cells to the row
+          row.appendChild(keyCell);
+          row.appendChild(valueCell);
+
+          // Append the row to the table body
+          resultBody.appendChild(row);
+        });
+      } else {
+        console.error('Data is not an object:', data);
+      }
+    });
+  });
+  // # Get entries by id
+  // # GET http://localhost:3000/api/entries/:id
+});
+
+const btUsers = document.querySelector('.get_users');
+btUsers.addEventListener('click', getUsers);
+
+async function getUsers() {
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users'
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer: ' + myToken,
+    },
+  };
+  fetchData(url, options).then((data) => {
+    // käsitellään fetchillä tullut JSON
+    console.log(data);
+    createTable(data);
+  });
+};
+
+
+// TOINEN TAPA USERS-TAULUKKOON
+async function createTable(data) {
   const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
 
-  const form = document.querySelector('.create_user_form');
-  const username = form.querySelector('input[name=username]').value;
-
-  const data = {
-    username: username,
-    password: form.querySelector('input[name=password]').value,
-    email: form.querySelector('input[name=email]').value,
-  };
-
   const options = {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: 'Bearer: ' + myToken,
     },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  };
+  fetchData(url, options).then((data) => {
+    console.log(data);
+  });
+
+  // table creation
+  const tbody = document.querySelector('.tbody');
+  tbody.innerHTML = '';
+
+
+  data.forEach(element => {
+    console.log(element.username);
+
+      // Create table row element
+      let tr = document.createElement('tr');
+
+      // td1 Username
+      let td1 = document.createElement('td');
+      td1.innerText = element.username;
+
+      // td2
+      let td2 = document.createElement('td');
+      td2.innerText = element.user_level;
+
+      // td3
+      let td3 = document.createElement('td');
+      let button1 = document.createElement('button');
+      button1.className = 'check';
+      button1.setAttribute('data-id', '1');
+      button1.innerText = 'Info';
+      td3.appendChild(button1);
+
+      button1.addEventListener('click', getUser);
+
+      // td4
+      let td4 = document.createElement('td');
+      let button2 = document.createElement('button');
+      button2.className = 'del';
+      button2.setAttribute('data-id', '1');
+      button2.innerText = 'Delete';
+      td4.appendChild(button2);
+
+      button2.addEventListener('click', deleteUser);
+
+      // td5
+      let td5 = document.createElement('td');
+      td5.innerText = element.user_id;
+
+      // Append table data elements to the table row element
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+      tr.appendChild(td5);
+
+      // Append the table row element to the table (assuming you have a table with the id 'myTable')
+      tbody.appendChild(tr);
+  })
+};
+
+function getUser() {
+  console.log('INFO PÅ DÄREN');
+};
+
+function deleteUser(evt) {
+  console.log('DELETE NY:/');
+
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users/';
+  let token = localStorage.getItem('token');
+  const options = {
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer:' + token,
+    },
   };
 
-
-  // parempi ehkä käyttää samaa muotoilua
-  try {
-    const responseData = await fetchData(url, options);
-    console.log(responseData);
-  } catch (error) {
-    console.error(error);
+  const answer = confirm('ootko varma et haluut poistaa?');
+  if (answer) {
+    fetchData(url, options).then((data) => {
+      console.log(data);
+      getUsers();
+    });
   }
-});
-
-// haetaan nappi josta haetaan formi ja logataan sisään
-// tästä saadaan TOKEN
-const loginUser = document.querySelector('.loginuser');
-
-loginUser.addEventListener('click', async (evt) => {
-  evt.preventDefault();
-  console.log('Nyt logataan sisään');
-
-  // # Login
-  // POST http://localhost:3000/api/auth/login
-  // content-type: application/json
-
-  // {
-  //   "username": "user",
-  //   "password": "secret"
-  // }
-
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
-
-  const form = document.querySelector('.login_form');
-
-  const data = {
-    username: form.querySelector('input[name=username]').value,
-    password: form.querySelector('input[name=password]').value,
-  };
-
-  const options = {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  };
-
-  // 1. Käy Ulla läpi tämä auth sivu ja sync/await rakenne vaihtoehto
-  // Tähän redirect
-  // samoin voi laittaa userID:n talteen..
-
-  fetchData(url, options).then((data) => {
-    // käsitellään fetchData funktiosta tullut JSON
-    console.log(data);
-    console.log(data.token);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('name', data.user.username);
-    logResponse('loginResponse', `localStorage set with token value: ${data.token}`);
-    // jos on token, console loggaa et kaik hyvi
-    // jos ei niin console loggaa että tokenia ei olt
-
-    if (data.token == undefined) {
-      alert('Unauthorized: username or password incorrect!');
-    } else {
-      alert('Authorized: you will now be redirected in 3 seconds');
-      setTimeout(function () {
-      window.location.href = 'index.html';
-      }, 3000);
-    }
-  });
-});
-
-// Haetaan nappi josta testataan TOKENIN käyttöä, /auth/me
-const meRequest = document.querySelector('#meRequest');
-meRequest.addEventListener('click', async () => {
-  console.log('Testataan TOKENIA ja haetaan käyttäjän tiedot');
-
-  // # Get user info by token (requires token)
-  // GET http://localhost:3000/api/auth/me
-  // Authorization: Bearer (put-user-token-here)
-
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
-  const muntokeni = localStorage.getItem('token');
-  console.log('Tämä on haettu LocalStoragesta', muntokeni);
-
-  const options = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-      Authorization: 'Bearer ' + muntokeni,
-    },
-  };
-
-  console.log(options);
-
-  fetchData(url, options).then((data) => {
-    // käsitellään fetchData funktiosta tullut JSON
-    console.log(data);
-    logResponse('meResponse', `Authorized user info: ${JSON.stringify(data)}`);
-  });
-});
-
-// Haetaan nappi josta tyhjennetään localStorage
-const clear = document.querySelector('#clearButton');
-clear.addEventListener('click', clearLocalStorage);
-
-// Apufunktio, kirjoittaa halutin koodiblokin sisään halutun tekstin
-function logResponse(codeblock, text) {
-  document.getElementById(codeblock).innerText = text;
+};
+  
+async function showUserName() {
+  console.log('Hei tääl ollaa ny pitäs hakea käyttäjänimi');
+  
+  let name = localStorage.getItem('name');
+  
+  console.log('nimesi on: ', name);
+  document.getElementById('name').innerHTML = name;
 }
 
-// Apufunktio, Tyhjennä local storage
-function clearLocalStorage() {
-  localStorage.removeItem('token');
-  logResponse('clearResponse', 'localStorage cleared!');
+showUserName();
+
+
+async function getAllUsers() {
+  console.log('toimii!');
+
+  try {
+    const response = await fetch('https://trdns.northeurope.cloudapp.azure.com/api/users');
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+
+    data.forEach((element) => {
+      console.log(element.username);
+    });
+
+    // tänne tiedot
+    const tbody = document.querySelector('.tbody');
+    tbody.innerHTML = '';
+
+    data.forEach((element) => {
+      console.log(element.username);
+
+      // Create table row element
+      var tr = document.createElement('tr');
+
+      // td1 Username
+      var td1 = document.createElement('td');
+      td1.innerText = element.username;
+
+      // td2
+      var td2 = document.createElement('td');
+      td2.innerText = element.user_level;
+
+      // td3
+      var td3 = document.createElement('td');
+      var button1 = document.createElement('button');
+      button1.className = 'check';
+      button1.setAttribute('data-id', '1');
+      button1.innerText = 'Info';
+      td3.appendChild(button1);
+
+      // td4
+      var td4 = document.createElement('td');
+      var button2 = document.createElement('button');
+      button2.className = 'del';
+      button2.setAttribute('data-id', '1');
+      button2.innerText = 'Delete';
+      td4.appendChild(button2);
+
+      // td5
+      var td5 = document.createElement('td');
+      td5.innerText = element.user_id;
+
+      // Append table data elements to the table row element
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+      tr.appendChild(td5);
+
+      // Append the table row element to the table (assuming you have a table with the id 'myTable')
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
+

@@ -192,34 +192,34 @@ async function getAllUsers() {
       console.log(element.username);
 
       // Create table row element
-      var tr = document.createElement('tr');
+      let tr = document.createElement('tr');
 
       // td1 Username
-      var td1 = document.createElement('td');
+      let td1 = document.createElement('td');
       td1.innerText = element.username;
 
       // td2
-      var td2 = document.createElement('td');
+      let td2 = document.createElement('td');
       td2.innerText = element.user_level;
 
       // td3
-      var td3 = document.createElement('td');
-      var button1 = document.createElement('button');
+      let td3 = document.createElement('td');
+      let button1 = document.createElement('button');
       button1.className = 'check';
       button1.setAttribute('data-id', '1');
       button1.innerText = 'Info';
       td3.appendChild(button1);
 
       // td4
-      var td4 = document.createElement('td');
-      var button2 = document.createElement('button');
+      let td4 = document.createElement('td');
+      let button2 = document.createElement('button');
       button2.className = 'del';
       button2.setAttribute('data-id', '1');
       button2.innerText = 'Delete';
       td4.appendChild(button2);
 
       // td5
-      var td5 = document.createElement('td');
+      let td5 = document.createElement('td');
       td5.innerText = element.user_id;
 
       // Append table data elements to the table row element

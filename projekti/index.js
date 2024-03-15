@@ -63,11 +63,6 @@ loginUser.addEventListener('click', async (evt) => {
     password: form.querySelector('input[name=password]').value,
   };
 
-  function deleteUser(evt) {
-  console.log('DELETE NY:/');
-
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users/';
-  let token = localStorage.getItem('token');
   const options = {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     headers: {
@@ -99,7 +94,7 @@ loginUser.addEventListener('click', async (evt) => {
       }, 3000);
     }
   });
-  }});
+});
 
 // Haetaan nappi josta testataan TOKENIN käyttöä, /auth/me
 const meRequest = document.querySelector('#meRequest');
@@ -117,7 +112,7 @@ meRequest.addEventListener('click', async () => {
   const options = {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     headers: {
-      Authorization: 'Bearer ' + muntokeni,
+      Authorization: 'Bearer: ' + muntokeni,
     },
   };
 

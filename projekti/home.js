@@ -112,7 +112,7 @@ meRequest.addEventListener('click', async () => {
   const options = {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     headers: {
-      Authorization: 'Bearer: ' + muntokeni,
+      Authorization: 'Bearer ' + muntokeni,
     },
   };
 

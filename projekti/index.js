@@ -99,7 +99,7 @@ loginUser.addEventListener('click', async (evt) => {
       }, 3000);
     }
   });
-});
+  }});
 
 // Haetaan nappi josta testataan TOKENIN käyttöä, /auth/me
 const meRequest = document.querySelector('#meRequest');

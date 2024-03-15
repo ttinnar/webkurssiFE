@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   btEntry.addEventListener('click', async () => {
     console.log('Klikki toimii');
-    const url = '/api/entries/1';
+    const url = 'https://trdns.northeurope.cloudapp.azure.com/api/entries/1';
 
     fetchData(url).then((data) => {
       // käsitellään fetchData funktiosta tullut JSON
@@ -50,7 +50,7 @@ const btUsers = document.querySelector('.get_users');
 btUsers.addEventListener('click', getUsers);
 
 async function getUsers() {
-  const url = '/api/users'
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users'
   const options = {
     method: 'GET',
     headers: {
@@ -67,7 +67,7 @@ async function getUsers() {
 
 // TOINEN TAPA USERS-TAULUKKOON
 async function createTable(data) {
-  const url = '/api/users';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
 
   const options = {
     method: 'GET',
@@ -141,7 +141,7 @@ function getUser() {
 function deleteUser(evt) {
   console.log('DELETE NY:/');
 
-  const url = '/api/users/';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users/';
   let token = localStorage.getItem('token');
   const options = {
     method: 'DELETE',

@@ -8,7 +8,7 @@ createUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt luodaan käyttäjä');
 
-  const url = '/api/users';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
 
   const form = document.querySelector('.create_user_form');
   const username = form.querySelector('input[name=username]').value;
@@ -54,7 +54,7 @@ loginUser.addEventListener('click', async (evt) => {
   //   "password": "secret"
   // }
 
-  const url = '/api/auth/login';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
 
   const form = document.querySelector('.login_form');
 
@@ -83,7 +83,7 @@ loginUser.addEventListener('click', async (evt) => {
     localStorage.setItem('name', data.user.username);
     logResponse('loginResponse', `localStorage set with token value: ${data.token}`);
     // jos on token, console loggaa et kaik hyvi
-    // jos ei niin vonsole loggaa että tokenia ei olt
+    // jos ei niin console loggaa että tokenia ei olt
 
     if (data.token == undefined) {
       alert('Unauthorized: username or password incorrect!');
@@ -105,7 +105,7 @@ meRequest.addEventListener('click', async () => {
   // GET http://localhost:3000/api/auth/me
   // Authorization: Bearer (put-user-token-here)
 
-  const url = '/api/auth/me';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
   const muntokeni = localStorage.getItem('token');
   console.log('Tämä on haettu LocalStoragesta', muntokeni);
 

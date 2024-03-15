@@ -7,12 +7,10 @@
  * @returns {Object} response json data
  */
 
-const serverUrl = 'https://trdns.northeurope.cloudapp.azure.com';
-
 const fetchData = async (url, options = {}) => {
   let jsonData;
   try {
-    const response = await fetch(serverUrl + url, options);
+    const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status} - ${response.statusText}`);
     }

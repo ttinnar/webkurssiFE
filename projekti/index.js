@@ -8,7 +8,7 @@ createUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt luodaan käyttäjä');
 
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
+  const url = 'http://127.0.0.1:3000/api/users';
 
   const form = document.querySelector('.create_user_form');
   const username = form.querySelector('input[name=username]').value;
@@ -20,21 +20,16 @@ createUser.addEventListener('click', async (evt) => {
   };
 
   const options = {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
+    body: JSON.stringify(data), 
   };
 
-
-  // parempi ehkä käyttää samaa muotoilua
-  try {
-    const responseData = await fetchData(url, options);
-    console.log(responseData);
-  } catch (error) {
-    console.error(error);
-  }
+  fetchData(url, options).then((data) => {
+    console.log(data);
+  });
 });
 
 // haetaan nappi josta haetaan formi ja logataan sisään
@@ -45,54 +40,40 @@ loginUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt logataan sisään');
 
-  // # Login
-  // POST http://localhost:3000/api/auth/login
-  // content-type: application/json
+  const url = 'http://127.0.0.1:3000/api/auth/login';
 
-  // {
-  //   "username": "user",
-  //   "password": "secret"
-  // }
-
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
-
+  // haetaan formi ja sen tiedot
   const form = document.querySelector('.login_form');
+  const username = form.querySelector('input[name=username]').value;
+  const password = form.querySelector('input[name=password]').value;
 
+  // isoi kovii juttui mitä tarvitaan
   const data = {
-    username: form.querySelector('input[name=username]').value,
-    password: form.querySelector('input[name=password]').value,
+    username: username,
+    password: password,
   };
 
   const options = {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
+    body: JSON.stringify(data), 
   };
 
-  // 1. Käy Ulla läpi tämä auth sivu ja sync/await rakenne vaihtoehto
-  // Tähän redirect
-  // samoin voi laittaa userID:n talteen..
-
   fetchData(url, options).then((data) => {
-    // käsitellään fetchData funktiosta tullut JSON
     console.log(data);
     console.log(data.token);
     localStorage.setItem('token', data.token);
-    localStorage.setItem('name', data.user.username);
-    logResponse('loginResponse', `localStorage set with token value: ${data.token}`);
-    // jos on token, console loggaa et kaik hyvi
-    // jos ei niin console loggaa että tokenia ei olt
 
     if (data.token == undefined) {
-      alert('Unauthorized: username or password incorrect!');
+      alert('Käyttäjänimi tai salasana väärin')
     } else {
-      alert('Authorized: you will now be redirected in 3 seconds');
-      setTimeout(function () {
+      // alert('Hienosti kirjauduit sisään good job!')
       window.location.href = 'index.html';
-      }, 3000);
-    }
+    };
+
+    logResponse('loginResponse', `localStorage set with token value: ${data.token}`);
   });
 });
 
@@ -101,28 +82,22 @@ const meRequest = document.querySelector('#meRequest');
 meRequest.addEventListener('click', async () => {
   console.log('Testataan TOKENIA ja haetaan käyttäjän tiedot');
 
-  // # Get user info by token (requires token)
-  // GET http://localhost:3000/api/auth/me
-  // Authorization: Bearer (put-user-token-here)
-
-  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
-  const muntokeni = localStorage.getItem('token');
-  console.log('Tämä on haettu LocalStoragesta', muntokeni);
+  const url = 'http://127.0.0.1:3000/api/auth/me';
+  const myToken = localStorage.getItem('token');
+  console.log(myToken)
 
   const options = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    method: 'GET',
     headers: {
-      Authorization: 'Bearer: ' + muntokeni,
+      Authorization: 'Bearer: ' + myToken,
     },
   };
 
-  console.log(options);
-
+  console.log(options)
   fetchData(url, options).then((data) => {
-    // käsitellään fetchData funktiosta tullut JSON
     console.log(data);
-    logResponse('meResponse', `Authorized user info: ${JSON.stringify(data)}`);
   });
+
 });
 
 // Haetaan nappi josta tyhjennetään localStorage
@@ -139,3 +114,4 @@ function clearLocalStorage() {
   localStorage.removeItem('token');
   logResponse('clearResponse', 'localStorage cleared!');
 }
+

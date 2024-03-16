@@ -10,7 +10,23 @@ createUser.addEventListener('click', async (evt) => {
 
   const url = 'http://127.0.0.1:3000/api/users';
 
+  // # Create user
+  // POST http://127.0.0.1:3000/api/users
+  // content-type: application/json
+
   const form = document.querySelector('.create_user_form');
+
+  // Validointi, jos päällä niin tutkitaan onko kentät kunnossa
+
+  // Check if the form is valid
+  if (!form.checkValidity()) {
+    // If the form is not valid, show the validation messages
+    form.reportValidity();
+    return; // Exit function if form is not valid
+  }
+
+  console.log('Tiedot valideja, jatketaan');
+
   const username = form.querySelector('input[name=username]').value;
 
   const data = {
@@ -20,16 +36,25 @@ createUser.addEventListener('click', async (evt) => {
   };
 
   const options = {
-    method: 'POST',
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), 
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
   };
 
-  fetchData(url, options).then((data) => {
-    console.log(data);
-  });
+  // fetchData(url, options).then((data) => {
+  //   // käsitellään fetchData funktiosta tullut JSON
+  //   console.log(data);
+  // });
+
+  // parempi ehkä käyttää samaa muotoilua
+  try {
+    const responseData = await fetchData(url, options);
+    console.log(responseData);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // haetaan nappi josta haetaan formi ja logataan sisään
@@ -70,7 +95,7 @@ loginUser.addEventListener('click', async (evt) => {
       alert('Käyttäjänimi tai salasana väärin')
     } else {
       // alert('Hienosti kirjauduit sisään good job!')
-      window.location.href = 'index.html';
+      window.location.href = 'home.html';
     };
 
     logResponse('loginResponse', `localStorage set with token value: ${data.token}`);

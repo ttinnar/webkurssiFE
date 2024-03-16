@@ -221,5 +221,5 @@ const logout = document.querySelector('.activelogout');
 
 logout.addEventListener('click', function(evt) {
   evt.preventDefault();
-  window.location.href = 'home.html';
+  window.location.href = 'index.html';
 });

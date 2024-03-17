@@ -43,12 +43,8 @@ createUser.addEventListener('click', async (evt) => {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   };
 
-  // fetchData(url, options).then((data) => {
-  //   // käsitellään fetchData funktiosta tullut JSON
-  //   console.log(data);
-  // });
 
-  // parempi ehkä käyttää samaa muotoilua
+  // fetchataan tiedot
   try {
     const responseData = await fetchData(url, options);
     console.log(responseData);
@@ -125,9 +121,7 @@ meRequest.addEventListener('click', async () => {
 
 });
 
-// Haetaan nappi josta tyhjennetään localStorage
-const clear = document.querySelector('#clearButton');
-clear.addEventListener('click', clearLocalStorage);
+
 
 // Apufunktio, kirjoittaa halutin koodiblokin sisään halutun tekstin
 function logResponse(codeblock, text) {

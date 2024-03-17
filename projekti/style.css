@@ -157,9 +157,10 @@ li a:hover:not(.active) {
 .user {
   display: block;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  background-color: #ffffff52;
+  padding: 16px 16px;
+  font-size: 30px;
+  text-shadow: 6px 6px 6px rgba(255, 255, 255, 0.693);
+  background-color: #000000b9;
 }
 #name {
   font-weight: bolder;
@@ -273,3 +274,20 @@ th, td {
 #hidden {
   display: none;
 }
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #00000092;
+}
+
+.result-body {
+  background-color: #0000007b; /* Tumma tausta */
+  color: #fff; /* Valkoinen teksti */
+}
+
+.result-body tr:hover {
+  background-color: #00000084; /* Vaaleampi tausta, kun kohdistin on päällä */
+}
+

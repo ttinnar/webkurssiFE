@@ -10,16 +10,18 @@
     <ul>
       <li><a href="index.html">log</a></li>
       <li><a href="home.html">home</a></li>
-      <li style="float: right" class="logout"><a href="">Logout</a></li>
+      <li class="navbar-title">WORKOUT DIARY</li>
+      <li class="logout"><a href="">Logout</a></li>
     </ul>
+    
 
     <!-- <div id="app"></div> -->
 
-    <div class="user">Welcome  <span id="name">NIMI TÄHÄN</span>!</div>
+    <div class="user">🎉 Welcome <span id="name">NIMI TÄHÄN</span>! 🎉</div>
 
     </div>
       <div style="flex: 1">
-        <h2>Create new workout diary entry!</h2>
+        <h2>Create new workout diary entry</h2>
         <p>Below you'll find a form to create a new workout diary entry! Remember to fill in each field accurately.</p>
 
           <div class="container" id="diary-container">
@@ -76,20 +78,20 @@
     </table>
 
     <div class="forms">
-      <div style="flex: 1">
-        
+      <div style="flex: 2">
 
-        <h3>GET and DELETE</h3>
+        <h2>Your workouts</h2>
 
         <p>
-          Hae käyttäjän tiedot painamalla alla olevaa nappia. Tämä hakee tiedot sekä luo taulukon
-          tbody osan. Jokaiselle riville luodaan nappula. Info hakee yksittäisen rivin tiedot ja
-          avaa dialogin. Delete poistaa yksittäisen rivin ja varmistaa tapahtuman confirm()
-          metodilla.
+          Below you will see two buttons. First you need to push the "search for workouts"-button
+          for application to put them into the list. Second button is for opening and closing the list.
+          <br>
+          <br>
+          After you have searched your workouts you can edit and delete them freely. 😊
         </p>
 
         <table class="result-table">
-          <button class="get_entries">Hae users tiedot</button>
+          <button class="get_entries">Search for workouts</button>
           <button class="toggle_list">Open/Close list</button>
           <thead>
             <tr>

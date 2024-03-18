@@ -1,7 +1,7 @@
 import './style.css';
 import { fetchData } from './fetch.js';
-import { convertDate, formatDate, getCurrentDate} from "./date-functions.js"
 import { showSnackbar } from "./snackbar.js";
+import { formatDate, getCurrentDate } from "./date.js";
 
 
 const url = 'http://localhost:3000/api/entries';
@@ -26,6 +26,8 @@ entryForm.addEventListener("submit", (event) => {
     gatherNewEntryData();
   }
 });
+
+
 
 // Function to gather data from the form
 async function gatherNewEntryData() {
@@ -103,6 +105,8 @@ toggleListButton.addEventListener('click', () => {
   }
 });
 
+
+
 const allButton = document.querySelector('.get_entries');
 allButton.addEventListener('click', getEntries);
 
@@ -116,6 +120,7 @@ async function getEntries() {
       Authorization: 'Bearer ' + token,
     },
   };
+
 
   fetchData(url, options)
     .then((data) => {
@@ -141,7 +146,7 @@ function createTable(data) {
     const tr = document.createElement('tr');
 
     const td2 = document.createElement('td');
-    td2.innerText = entry.entry_date;
+    td2.innerText = formatDate(entry.entry_date);
 
     const td3 = document.createElement('td');
     td3.innerText = entry.workout;
@@ -267,6 +272,7 @@ function showModalForEdit(data) {
   saveButton.addEventListener('click', saveEdit);
 }
 
+//function to save the edited workout
 async function saveEdit(evt) {
   const entryId = evt.target.dataset.id;
   console.log('Saving changes for entry ID:', entryId);
@@ -311,7 +317,7 @@ async function saveEdit(evt) {
 }
 
 
-
+//function to delete a workout
 async function deleteWorkout(evt) {
   console.log('Deleting workout entry');
   
@@ -340,6 +346,7 @@ async function deleteWorkout(evt) {
     },
   };
 
+
   // Send the DELETE request to delete the entry
   fetchData(url, options)
     .then((data) => {
@@ -351,8 +358,6 @@ async function deleteWorkout(evt) {
       console.error('Error deleting workout entry:', error);
     });
 }
-
-
 
 
 async function showUserName() {

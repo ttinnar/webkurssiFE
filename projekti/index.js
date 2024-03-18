@@ -8,7 +8,7 @@ createUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt luodaan käyttäjä');
 
-  const url = 'http://127.0.0.1:3000/api/users';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/users';
 
   // # Create user
   // POST http://127.0.0.1:3000/api/users
@@ -61,7 +61,7 @@ loginUser.addEventListener('click', async (evt) => {
   evt.preventDefault();
   console.log('Nyt logataan sisään');
 
-  const url = 'http://127.0.0.1:3000/api/auth/login';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/login';
 
   // haetaan formi ja sen tiedot
   const form = document.querySelector('.login_form');
@@ -103,7 +103,7 @@ const meRequest = document.querySelector('#meRequest');
 meRequest.addEventListener('click', async () => {
   console.log('Testataan TOKENIA ja haetaan käyttäjän tiedot');
 
-  const url = 'http://127.0.0.1:3000/api/auth/me';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
   const myToken = localStorage.getItem('token');
   console.log(myToken)
 

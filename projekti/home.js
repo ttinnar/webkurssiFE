@@ -4,7 +4,7 @@ import { showSnackbar } from "./snackbar.js";
 import { formatDate, getCurrentDate } from "./date.js";
 
 
-const url = 'http://localhost:3000/api/entries';
+const url = 'https://trdns.northeurope.cloudapp.azure.com/api/entries';
 
 // Get and listen for 'Create a diary entry' -form submit
 const entryForm = document.querySelector("#entry_form");
@@ -70,14 +70,14 @@ async function gatherNewEntryData() {
 // Function to send POST request
 async function postNewEntry(options) {
   // Define POST request and send it
-  postData('http://localhost:3000/api/entries', options) 
+  postData('https://trdns.northeurope.cloudapp.azure.com/api/entries', options) 
     .then(data => {
       console.log('Response:', data); // Print response to console
       showSnackbar("darkgreen", "New entry added!"); // Show success message
     })
     .catch(error => {
       console.error('Error:', error); // Print error to console
-      showSnackbar("crimson", "New entry couldn't be added!"); // Show error message
+      showSnackbar("red", "New entry couldn't be added!"); // Show error message
     });
 }
 
@@ -112,7 +112,7 @@ allButton.addEventListener('click', getEntries);
 
 async function getEntries() {
   console.log('Haetaan kaikki merkinnät');
-  const url = 'http://localhost:3000/api/entries';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/entries';
   const token = localStorage.getItem('token');
   const options = {
     method: 'GET',
@@ -206,7 +206,7 @@ async function getEntry(evt) {
   // haetaan data-attribuutin avulla id, tämä nopea tapa
   const id = evt.target.attributes['data-id'].value;
   console.log('Getting individual data for ID:', id, userId);
-  const url = `http://127.0.0.1:3000/api/entries/${id}`;
+  const url = `https://trdns.northeurope.cloudapp.azure.com/api/entries/${id}`;
   let token = localStorage.getItem('token');
   const options = {
     method: 'GET',
@@ -236,7 +236,7 @@ async function Workout(evt) {
   console.log(id);
 
   // Määritellään URL merkinnän hakemiseksi
-  const url = `http://127.0.0.1:3000/api/entries/${id}`;
+  const url = `https://trdns.northeurope.cloudapp.azure.com/api/entries/${id}`;
   let token = localStorage.getItem('token');
   const options = {
     method: 'GET',
@@ -287,7 +287,7 @@ async function saveEdit(evt) {
   };
 
   // Construct the URL for updating the entry
-  const url = `http://127.0.0.1:3000/api/entries/${entryId}`;
+  const url = `https://trdns.northeurope.cloudapp.azure.com/api/entries/${entryId}`;
 
   // Retrieve the token from localStorage
   const token = localStorage.getItem('token');
@@ -333,7 +333,7 @@ async function deleteWorkout(evt) {
   }
 
   // Construct the URL for deleting the entry
-  const url = `http://127.0.0.1:3000/api/entries/${entryId}`;
+  const url = `https://trdns.northeurope.cloudapp.azure.com/api/entries/${entryId}`;
 
   // Retrieve the token from localStorage
   const token = localStorage.getItem('token');
@@ -364,7 +364,7 @@ async function showUserName() {
   console.log('Onnistuneesti kirjauduttu ja käyttäjätietojen pitäisi näkyä');
 
 
-  const url = 'http://localhost:3000/api/auth/me';
+  const url = 'https://trdns.northeurope.cloudapp.azure.com/api/auth/me';
   let token = localStorage.getItem('token');
   const options = {
     method: 'GET',

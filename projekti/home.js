@@ -3,54 +3,6 @@ import { fetchData } from './fetch.js';
 import { convertDate, formatDate, getCurrentDate} from "./date-functions.js"
 import { showSnackbar } from "./snackbar.js";
 
-const bt1 = document.querySelector('.get_entry');
-const tbody = document.querySelector('.result-body'); // Etsi taulukon tbody-elementti
-
-bt1.addEventListener('click', async () => {
-  console.log('Klikki toimii');
-  const url = 'http://localhost:3000/api/entries';
-
-  const token = localStorage.getItem('token');
-  const options = {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + token, // Poistettu ylimääräinen kaksoispiste
-    },
-  };
-
-  try {
-    const data = await fetchData(url, options);
-    console.log(data);
-    renderData(data); // Kutsutaan renderData-funktiota datan näyttämiseksi HTML-sivulla
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-function renderData(data) {
-  // Tyhjennetään taulukon tbody-elementti
-  tbody.innerHTML = '';
-
-  // Käydään läpi data ja lisätään jokainen tietue taulukkoon
-  data.forEach(entry => {
-    // Luodaan uusi tr-elementti
-    const tr = document.createElement('tr');
-
-    // Lisätään jokainen tieto uusiin td-elementteihin
-    for (const key in entry) {
-      if (Object.hasOwnProperty.call(entry, key)) {
-        const td = document.createElement('td');
-        td.textContent = entry[key];
-        tr.appendChild(td);
-      }
-    }
-
-    // Lisätään tr-elementti tbody-elementtiin
-    tbody.appendChild(tr);
-  });
-}
-
-
 
 const url = 'http://localhost:3000/api/entries';
 
@@ -137,118 +89,107 @@ async function postData(url, options = {}) {
 }
 
 
+const toggleListButton = document.querySelector('.toggle_list');
+const table = document.querySelector('.result-table');
+let listVisible = false;
 
-// async function postNewEntry(entry) {
-//   // Define POST request and send it
-//   const data = await postRequest('http://localhost:3000/api/entries', entry) 
-//   if (!data.error) {
-//     console.log(data);
-//     showSnackbar("darkgreen", "New entry added!");
-//   } else {
-//     showSnackbar("crimson", "New entry couldn't be added!");
-//   }
-// }
-  
-// async function doSomething() {
-//   const data = await postRequest(url, postBody)
-//   // Define request
-//   let token = localStorage.getItem("token");
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       Authorization: "Bearer: " + token,
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(postBody),
-//   };
-//   return fetchData(url, options)
-// }
+toggleListButton.addEventListener('click', () => {
+  listVisible = !listVisible; // Vaihdetaan listan näkyvyyttä
 
+  if (listVisible) {
+    table.style.display = 'table'; // Näytetään lista
+  } else {
+    table.style.display = 'none'; // Piilotetaan lista
+  }
+});
 
+const allButton = document.querySelector('.get_entries');
+allButton.addEventListener('click', getEntries);
 
-const allButton = document.querySelector('.get_users');
-allButton.addEventListener('click', getUsers);
-
-async function getUsers() {
-  console.log('Haetaa kaikki käyttäjät');
-  const url = 'http://127.0.0.1:3000/api/users';
-  let token = localStorage.getItem('token');
+async function getEntries() {
+  console.log('Haetaan kaikki merkinnät');
+  const url = 'http://localhost:3000/api/entries';
+  const token = localStorage.getItem('token');
   const options = {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer: ' + token,
+      Authorization: 'Bearer ' + token,
     },
   };
 
-  fetchData(url, options).then((data) => {
-    createTable(data);
-  });
-
+  fetchData(url, options)
+    .then((data) => {
+      createTable(data);
+    })
+    .catch((error) => {
+      console.error('Error fetching entries:', error);
+    });
 }
 
 function createTable(data) {
   console.log(data);
 
-  // etitään tbody elementti
+  // Etsitään tbody elementti
   const tbody = document.querySelector('.tbody');
   tbody.innerHTML = '';
 
-  // loopissa luodaan jokaiselle tietoriville oikeat elementit
-  // elementtien sisään pistetään oikeat tiedot
+  // Käydään läpi jokainen tietue ja luodaan sille rivi taulukkoon
+  data.forEach((entry) => {
+    console.log(entry.user_id, entry.entry_date, entry.workout, entry.duration, entry.intensity, entry.notes);
 
-  data.forEach((rivi) => {
-    console.log(rivi.user_id, rivi.username, rivi.user_level);
-
-    // Luodaan jokaiselle riville ensin TR elementti alkuun
+    // Luodaan TR elementti jokaiselle tietueelle
     const tr = document.createElement('tr');
 
-    // Luodaan soluja mihihin tiedot
-    const td1 = document.createElement('td');
-    td1.innerText = rivi.username;
-
-    // Luodaan soluja mihihin tiedot
     const td2 = document.createElement('td');
-    td2.innerText = rivi.user_level;
-
-    // <td><button class="check" data-id="2">Info</button></td>
-    // const td3 = document.createElement('td');
-    //td3.innerHTML = `<button class="check" data-id="${rivi.user_id}">Info</button>`;
+    td2.innerText = entry.entry_date;
 
     const td3 = document.createElement('td');
-    const button1 = document.createElement('button');
-    button1.className = 'check';
-    button1.setAttribute('data-id', rivi.user_id);
-    button1.innerText = 'Info';
-    td3.appendChild(button1);
+    td3.innerText = entry.workout;
 
-    button1.addEventListener('click', getUser);
-
-    // td4
     const td4 = document.createElement('td');
+    td4.innerText = entry.duration;
+
+    const td5 = document.createElement('td');
+    td5.innerText = entry.intensity;
+
+    const td6 = document.createElement('td');
+    td6.innerText = entry.notes;
+    
+    const td7 = document.createElement('td');
     const button2 = document.createElement('button');
-    button2.className = 'del';
-    button2.setAttribute('data-id', rivi.user_id);
-    button2.innerText = 'Delete';
-    td4.appendChild(button2);
+    button2.className = 'check';
+    button2.setAttribute('data-id', entry.entry_id);
+    button2.innerText = 'Edit workout';
+    td7.appendChild(button2);
+
+    const td8 = document.createElement('td');
+    const button3 = document.createElement('button');
+    button3.className = 'check';
+    button3.setAttribute('data-id', entry.entry_id);
+    button3.innerText = 'Delete';
+    td8.appendChild(button3);
 
     // 2. Lisää kuuntelija kun taulukko on tehty
-    button2.addEventListener('click', deleteUser);
+    button2.addEventListener('click', Workout);
+    button3.addEventListener('click', deleteWorkout);
+    
 
-    // td5
-    var td5 = document.createElement('td');
-    td5.innerText = rivi.user_id;
-
-    tr.appendChild(td1);
+    // Lisätään solut riville
     tr.appendChild(td2);
     tr.appendChild(td3);
     tr.appendChild(td4);
     tr.appendChild(td5);
+    tr.appendChild(td6);
+    tr.appendChild(td7);
+    tr.appendChild(td8);
+
+
+    // Lisätään rivi tbodyhin
     tbody.appendChild(tr);
   });
 }
 
 // Haetaan dialogi yksittäisille tiedoille
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 const dialog = document.querySelector('.info_dialog');
 const closeButton = document.querySelector('.info_dialog button');
 // "Close" button closes the dialog
@@ -256,11 +197,11 @@ closeButton.addEventListener('click', () => {
   dialog.close();
 });
 
-async function getUser(evt) {
+async function getEntry(evt) {
   // haetaan data-attribuutin avulla id, tämä nopea tapa
   const id = evt.target.attributes['data-id'].value;
-  console.log('Getting individual data for ID:', id);
-  const url = `http://127.0.0.1:3000/api/users/${id}`;
+  console.log('Getting individual data for ID:', id, userId);
+  const url = `http://127.0.0.1:3000/api/entries/${id}`;
   let token = localStorage.getItem('token');
   const options = {
     method: 'GET',
@@ -275,50 +216,144 @@ async function getUser(evt) {
     console.log('in modal');
     dialog.querySelector('p').innerHTML = `
           <div>User ID: <span>${data.user_id}</span></div>
-          <div>User Name: <span>${data.username}</span></div>
-          <div>Email: <span>${data.email}</span></div>
-          <div>Role: <span>${data.user_level}</span></div>
+          <div>User Name: <span>${data.workout}</span></div>
+          <div>Email: <span>${data.notes}</span></div>
     `;
   });
 }
 
-
-
-
-
-
-
-async function deleteUser(evt) {
-  console.log('Deletoit tietoa');
+async function Workout(evt) {
+  console.log('Muokataan tietoa');
   console.log(evt);
 
-  // Tapa 1, haetaan arvo tutkimalla eventtiä
+  // Haetaan merkinnän tunniste eventistä
   const id = evt.target.attributes['data-id'].value;
   console.log(id);
 
-  // Tapa 2 haetaan "viereinen elementti"
-  const id2 = evt.target.parentElement.nextElementSibling.textContent;
-  console.log('Toinen tapa: ', id2);
-
-
-
-  const url = `http://127.0.0.1:3000/api/users/${id}`;
+  // Määritellään URL merkinnän hakemiseksi
+  const url = `http://127.0.0.1:3000/api/entries/${id}`;
   let token = localStorage.getItem('token');
   const options = {
-    method: 'DELETE',
+    method: 'GET',
     headers: {
       Authorization: 'Bearer: ' + token,
     },
   };
 
-  const answer = confirm(`Oletko varma että haluat poistaa käyttäjän ID: ${id} `);
-  if (answer) {
-    fetchData(url, options).then((data) => {
-      console.log(data);
-      getUsers();
-    });
-  }
+  // Haetaan merkinnän tiedot
+  fetchData(url, options).then((data) => {
+    console.log(data);
+    // Näytetään modaalivalikko muokkausta varten
+    showModalForEdit(data);
+  });
 }
+
+// Funktio, joka näyttää modaalivalikon muokkausta varten ja täyttää sen tiedoilla
+function showModalForEdit(data) {
+  dialog.showModal();
+  console.log('in modal');
+  dialog.querySelector('p').innerHTML = `
+    <div>Entry ID: <span>${data.entry_id}</span></div>
+    <div>Entry Date: <input type="date" id="edit-entry-date" value="${data.entry_date}"></div>
+    <div>Workout: <input type="text" id="edit-workout" value="${data.workout}"></div>
+    <div>Duration: <input type="number" id="edit-duration" value="${data.duration}"></div>
+    <div>Intensity: <input type="text" id="edit-intensity" value="${data.intensity}"></div>
+    <div>Notes: <textarea id="edit-notes">${data.notes}</textarea></div>
+    <button class="save-edit" data-id="${data.entry_id}">Save Changes</button>
+  `;
+
+  // Add event listener for the "Save Changes" button
+  const saveButton = document.querySelector('.save-edit');
+  saveButton.addEventListener('click', saveEdit);
+}
+
+async function saveEdit(evt) {
+  const entryId = evt.target.dataset.id;
+  console.log('Saving changes for entry ID:', entryId);
+
+  // Get the updated values from the input fields
+  const updatedEntry = {
+    entry_date: document.getElementById('edit-entry-date').value,
+    workout: document.getElementById('edit-workout').value,
+    duration: document.getElementById('edit-duration').value,
+    intensity: document.getElementById('edit-intensity').value,
+    notes: document.getElementById('edit-notes').value,
+  };
+
+  // Construct the URL for updating the entry
+  const url = `http://127.0.0.1:3000/api/entries/${entryId}`;
+
+  // Retrieve the token from localStorage
+  const token = localStorage.getItem('token');
+
+  // Set up the options for the PUT request
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(updatedEntry),
+  };
+
+  // Send the PUT request to update the entry
+  fetchData(url, options)
+    .then((data) => {
+      console.log('Workout updated successfully:', data);
+      // Optionally, you can reload the entries after updating
+      getEntries();
+      // Close the modal after updating
+      dialog.close();
+    })
+    .catch((error) => {
+      console.error('Error updating workout:', error);
+    });
+}
+
+
+
+async function deleteWorkout(evt) {
+  console.log('Deleting workout entry');
+  
+  // Get the entry ID from the clicked button's data-id attribute
+  const entryId = evt.target.dataset.id;
+  console.log('Entry ID to delete:', entryId);
+
+  // Confirm with the user before proceeding with deletion
+  const answer = confirm(`Are you sure you want to delete workout entry with ID: ${entryId}?`);
+  if (!answer) {
+    // If the user cancels deletion, do nothing
+    return;
+  }
+
+  // Construct the URL for deleting the entry
+  const url = `http://127.0.0.1:3000/api/entries/${entryId}`;
+
+  // Retrieve the token from localStorage
+  const token = localStorage.getItem('token');
+
+  // Set up the options for the DELETE request
+  const options = {
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  };
+
+  // Send the DELETE request to delete the entry
+  fetchData(url, options)
+    .then((data) => {
+      console.log('Workout entry deleted successfully:', data);
+      // Optionally, you can reload the entries after deletion
+      getEntries();
+    })
+    .catch((error) => {
+      console.error('Error deleting workout entry:', error);
+    });
+}
+
+
+
 
 async function showUserName() {
   console.log('Onnistuneesti kirjauduttu ja käyttäjätietojen pitäisi näkyä');

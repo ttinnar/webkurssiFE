@@ -15,88 +15,14 @@
 
     <!-- <div id="app"></div> -->
 
-    <div class="user">Hei kirjautunut käyttäjä: <span id="name">NIMI TÄHÄN</span>!</div>
+    <div class="user">Welcome  <span id="name">NIMI TÄHÄN</span>!</div>
 
-
- 
-        <!-- and so on... -->
-        <!-- Delete nappula poistaa käyttäjän-->
-        <!-- käytämme tässä apuna data-attribuutteja-->
-        <!-- # Delete user
-              DELETE http://127.0.0.1:3000/users/:id
-        -->
-      </tbody>
-    </table>
-
-    <div class="forms">
+    </div>
       <div style="flex: 1">
+        <h2>Create new workout diary entry!</h2>
+        <p>Below you'll find a form to create a new workout diary entry! Remember to fill in each field accurately.</p>
 
-        <h3>Kotitehtävä, tee ja testaa kaikki: /api/entries</h3>
-
-        <table class="result-table">
-          <thead>
-            <tr>
-              <th>WORKOUT_ID</th>
-              <th>USER_ID</th>
-              <th>WORKOUT DATE</th>
-              <th>WORKOUT TYPE</th>
-              <th>DURATION MINUTES</th>
-              <th>INTENSITY</th>
-              <th>NOTES</th>
-            </tr>
-          </thead>
-        
-        <button class="get_entry">Hae (user:1) entries</button>
-          <tbody class="result-body"></tbody>
-        </table>  
-        <script type="module" src="/home.js"></script>
-
-        <h3>GET and DELETE</h3>
-
-        <p>
-          Hae käyttäjän tiedot painamalla alla olevaa nappia. Tämä hakee tiedot sekä luo taulukon
-          tbody osan. Jokaiselle riville luodaan nappula. Info hakee yksittäisen rivin tiedot ja
-          avaa dialogin. Delete poistaa yksittäisen rivin ja varmistaa tapahtuman confirm()
-          metodilla.
-        </p>
-
-        <table class="result-table">
-          <button class="get_users">Hae users tiedot</button>
-          <thead>
-            <tr>
-              <th>Workout name</th>
-              <th>Weight lifted</th>
-              <th>Reps</th>
-              <th>Delete</th>
-              <th>ID</th>
-            </tr>
-          </thead>
-          <tbody class="tbody">
-            <!-- tänne haetaan kaikki käyttäjät -->
-            <!-- # Get all users -->
-            <!-- GET http://127.0.0.1:3000/api/users -->
-          </tbody>
-        </table>
-
-        
-      </div>
-      <div style="flex: 1">
-        <h3>PUT and FORMS</h3>
-
-        <div class="top-left-diary">
-          <h3>Manage your diary</h3>
-          <p>MoodMate ensures that your
-            feelings are documented, helping you gain valuable insights into
-            your emotional journey.
-          </p>
-          <button id="get_all_entries">Get entries</button>
-          <button id="hide_all_entries">Hide entries</button>
-        </div>
-
-        <!-- Bottom-left section -->
-        <div class="bottom-left-diary" >
           <div class="container" id="diary-container">
-            <h1>Create a diary entry</h1>
             <!-- Form for new diary entry -->
             <form method="post" id="entry_form">
               <label for="workout">Add a workout: </label>
@@ -147,20 +73,53 @@
         </div>
       </div>
       </div>
+    </table>
+
+    <div class="forms">
+      <div style="flex: 1">
+        
+
+        <h3>GET and DELETE</h3>
+
+        <p>
+          Hae käyttäjän tiedot painamalla alla olevaa nappia. Tämä hakee tiedot sekä luo taulukon
+          tbody osan. Jokaiselle riville luodaan nappula. Info hakee yksittäisen rivin tiedot ja
+          avaa dialogin. Delete poistaa yksittäisen rivin ja varmistaa tapahtuman confirm()
+          metodilla.
+        </p>
+
+        <table class="result-table">
+          <button class="get_entries">Hae users tiedot</button>
+          <button class="toggle_list">Open/Close list</button>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Workout</th>
+              <th>Duration minutes</th>
+              <th>Intensity</th>
+              <th>Notes</th>
+              <th>Edit workout</th>
+              <th>Delete workout?</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+            <!-- tänne haetaan kaikki merkinnät -->
+            <!-- # Get all entries -->
+            <!-- GET http://127.0.0.1:3000/api/entries -->
+          </tbody>
+        </table>
+
+        
+      
     </div>
 
     <div id="snackbar-target"></div>
 
     <dialog class="info_dialog">
       <p>
-        <!-- tänne haetaan yksittäinen valittu käyttäjät -->      
-        <div>UserID: <span>Id</span></div>
-        <div>UserName: <span>Username</span></div>
-        <div>Email: <span>Email</span></div>
-        <div>Role: <span>Role</span></div> 
       </p>
       <button autofocus>Close</button>
     </dialog>
-
+    <script type="module" src="/home.js"></script>
   </body>
 </html>

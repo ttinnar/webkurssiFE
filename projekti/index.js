@@ -90,7 +90,7 @@ loginUser.addEventListener('click', async (evt) => {
     if (data.token == undefined) {
       alert('Käyttäjänimi tai salasana väärin')
     } else {
-      // alert('Hienosti kirjauduit sisään good job!')
+      // alert('login compelted good job!')
       window.location.href = 'home.html';
     };
 
@@ -126,11 +126,5 @@ meRequest.addEventListener('click', async () => {
 // Apufunktio, kirjoittaa halutin koodiblokin sisään halutun tekstin
 function logResponse(codeblock, text) {
   document.getElementById(codeblock).innerText = text;
-}
-
-// Apufunktio, Tyhjennä local storage
-function clearLocalStorage() {
-  localStorage.removeItem('token');
-  logResponse('clearResponse', 'localStorage cleared!');
 }
 

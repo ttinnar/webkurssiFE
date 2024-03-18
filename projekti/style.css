@@ -3,7 +3,6 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  text-shadow: 2px 2px #0000006f;
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -15,6 +14,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  background-color: #ffffff30;
+}
 
 html {
   background-image: url('https://w.forfun.com/fetch/de/de15acfd670988be6fb60f440728d7ba.jpeg');
@@ -91,7 +93,7 @@ button:focus-visible {
   }
 } */
 
-h3 {
+h2 {
   border-bottom: 5px solid rgba(255, 255, 255, 0.229);
   margin-top: 50px;
 }
@@ -291,3 +293,31 @@ th, td {
   background-color: #00000084; /* Vaaleampi tausta, kun kohdistin on päällä */
 }
 
+#snackbar-target {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+#snackbar-target.show {
+visibility: visible;
+-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.hidden {
+  display: none;
+}
+
+th {
+  text-align: center;
+}

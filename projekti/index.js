@@ -1,6 +1,5 @@
 import './style.css';
 import { fetchData } from './fetch.js';
-import { showSnackbar } from "./snackbar.js";
 
 // haetaan nappi josta lähetetään formi ja luodaan käyttäjä
 const createUser = document.querySelector('.createuser');
@@ -44,18 +43,17 @@ createUser.addEventListener('click', async (evt) => {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   };
 
-  console.log('Response:', data); // Print response to console
-  showSnackbar("darkgreen", "New user created!"); // Show success message
-
-
   // fetchataan tiedot
   try {
     const responseData = await fetchData(url, options);
     console.log(responseData);
   } catch (error) {
     console.error(error);
+    alert('could not create new user. The creation did not match the security needs')
   }
 });
+
+alert('New user created!!')
 
 // haetaan nappi josta haetaan formi ja logataan sisään
 // tästä saadaan TOKEN

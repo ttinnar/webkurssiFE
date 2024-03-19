@@ -32,7 +32,7 @@ p {
 }
 
 html {
-  background-image: url('../pics/projekti.jpeg');
+  background-image: url('projekti.jpeg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

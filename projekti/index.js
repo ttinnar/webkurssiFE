@@ -47,13 +47,12 @@ createUser.addEventListener('click', async (evt) => {
   try {
     const responseData = await fetchData(url, options);
     console.log(responseData);
+    alert('New user created!');
   } catch (error) {
     console.error(error);
-    alert('could not create new user. The creation did not match the security needs')
   }
 });
 
-alert('New user created!!')
 
 // haetaan nappi josta haetaan formi ja logataan sisään
 // tästä saadaan TOKEN

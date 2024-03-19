@@ -306,11 +306,11 @@ async function saveEdit(evt) {
   fetchData(url, options)
     .then((data) => {
       console.log('Workout updated successfully:', data);
-      showSnackbar("darkgreen", "Diary entry update!"); // Show success message
       // Optionally, you can reload the entries after updating
       getEntries();
       // Close the modal after updating
       dialog.close();
+      showSnackbar("darkgreen", "Diary entry update!"); // Show success message
     })
     .catch((error) => {
       console.error('Error updating workout:', error);

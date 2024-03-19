@@ -276,6 +276,8 @@ function showModalForEdit(data) {
 async function saveEdit(evt) {
   const entryId = evt.target.dataset.id;
   console.log('Saving changes for entry ID:', entryId);
+  showSnackbar("darkgreen", "Diary entry update!"); // Show success message
+  
 
   // Get the updated values from the input fields
   const updatedEntry = {
@@ -310,7 +312,6 @@ async function saveEdit(evt) {
       getEntries();
       // Close the modal after updating
       dialog.close();
-      showSnackbar("darkgreen", "Diary entry update!"); // Show success message
     })
     .catch((error) => {
       console.error('Error updating workout:', error);

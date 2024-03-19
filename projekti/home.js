@@ -19,7 +19,7 @@ entryForm.addEventListener("submit", (event) => {
     return;
   // Check if user has changed input in dropdown menu from the placeholder
   } else if (workout === 'placeholder') {
-    showSnackbar('Crimson', 'Please select a color to represent your mood')
+    showSnackbar('Crimson', 'New workout added!')
     return;
   } else {
     // Form passed all validation continue to send request
@@ -77,7 +77,7 @@ async function postNewEntry(options) {
     })
     .catch(error => {
       console.error('Error:', error); // Print error to console
-      showSnackbar("red", "New entry couldn't be added!"); // Show error message
+      showSnackbar("crimson", "New entry couldn't be added!"); // Show error message
     });
 }
 
@@ -276,8 +276,6 @@ function showModalForEdit(data) {
 async function saveEdit(evt) {
   const entryId = evt.target.dataset.id;
   console.log('Saving changes for entry ID:', entryId);
-  showSnackbar("darkgreen", "Diary entry update!"); // Show success message
-  
 
   // Get the updated values from the input fields
   const updatedEntry = {

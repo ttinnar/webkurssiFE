@@ -90,7 +90,7 @@ loginUser.addEventListener('click', async (evt) => {
     if (data.token == undefined) {
       alert('Käyttäjänimi tai salasana väärin')
     } else {
-      alert('login in now!')
+      alert('logging in to your account now!')
       window.location.href = 'home.html';
     };
 

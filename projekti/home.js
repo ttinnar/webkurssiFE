@@ -306,6 +306,7 @@ async function saveEdit(evt) {
   fetchData(url, options)
     .then((data) => {
       console.log('Workout updated successfully:', data);
+      showSnackbar("darkgreen", "Diary entry updated!"); // Show success message
       // Optionally, you can reload the entries after updating
       getEntries();
       // Close the modal after updating
